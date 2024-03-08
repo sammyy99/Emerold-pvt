@@ -12,7 +12,7 @@ const Header = () => {
   };
 
   return (
-    <div className="fixed w-full shadow-md font-serif md:flex md:justify-between grid grid-cols-2 py-4 md:py-5 px-4 md:px-10 text-white bg-neutral-800">
+    <div className="fixed z-20 w-full shadow-md shadow-black font-serif md:flex md:justify-between grid grid-cols-2 py-3 md:py-4 px-4 md:px-10 text-white bg-neutral-800">
 
       <div className="col-span-1 text-3xl font-semibold flex space-x-1 items-center"><div>Emerold</div><img className="w-10" alt="" src="logo.svg"></img></div>
 
@@ -20,49 +20,49 @@ const Header = () => {
         onClick={() => {
           handleMenu();
         }}
-        className="md:hidden col-span-1 flex justify-end"
+        className={`md:hidden col-span-1 flex justify-end items-center ${showMenu?"text-emerald-500":"texh-white"}`}
       >
         <MenuIcon fontSize="large" />
       </div>
 
       <nav
-        className={`md:flex md:space-x-12 text-xl transition-all duration-500 ease-in-out ${
+        className={`md:flex md:space-x-12 text-xl md:text-lg  ${
           showMenu
             ? "col-span-2 text-center pt-8 bg-neutral-800 text-white rounded-t-xl"
             : "hidden"
         }`}
       >
-        <div className="py-1 md:py-auto hover:text-emerald-500 hover:cursor-pointer">
+        <div className="py-1 md:py-auto hover:text-emerald-500 hover:cursor-pointer transition-all duration-300">
           Home
         </div>
-        <div className="py-1 md:py-auto hover:text-emerald-500 hover:cursor-pointer">
+        <div className="py-1 md:py-auto hover:text-emerald-500 hover:cursor-pointer transition-all duration-300">
           About
         </div>
-        <div className="py-1 md:py-auto hover:text-emerald-500 hover:cursor-pointer">
+        <div className="py-1 md:py-auto hover:text-emerald-500 hover:cursor-pointer transition-all duration-300">
           Products
         </div>
-        <div className="py-1 md:py-auto hover:text-emerald-500 hover:cursor-pointer">
+        <div className="py-1 md:py-auto hover:text-emerald-500 hover:cursor-pointer transition-all duration-300">
           Services
         </div>
-        <div className="pt-1 md:py-auto hover:text-emerald-500 hover:cursor-pointer">
+        <div className="pt-1 md:py-auto hover:text-emerald-500 hover:cursor-pointer transition-all duration-300">
           Contact
         </div>
       </nav>
 
       <div
-        className={`md:flex space-x-3 ${
+        className={`md:flex md:items-center space-x-3 ${
           showMenu
             ? "col-span-2 flex justify-center py-6 bg-neutral-800 text-white rounded-b-xl"
             : "hidden"
         }`}
       >
-        <div className=" hover:text-emerald-500  hover:cursor-pointer">
+        <div className=" hover:text-emerald-500  hover:cursor-pointer transition-all duration-300">
           <XIcon />
         </div>
-        <div className=" hover:text-emerald-500  hover:cursor-pointer">
+        <div className=" hover:text-emerald-500  hover:cursor-pointer transition-all duration-300">
           <FacebookIcon />
         </div>
-        <div className=" hover:text-emerald-500  hover:cursor-pointer">
+        <div className=" hover:text-emerald-500  hover:cursor-pointer transition-all duration-300">
           <LinkedInIcon />
         </div>
       </div>
