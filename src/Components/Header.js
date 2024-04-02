@@ -3,6 +3,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import XIcon from "@mui/icons-material/X";
 import MenuIcon from "@mui/icons-material/Menu";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -10,6 +11,10 @@ const Header = () => {
   const handleMenu = () => {
     setShowMenu(!showMenu);
   };
+
+  const handleMenuClose = ()=>{
+    setShowMenu(false);
+  }
 
   return (
     <div className="fixed z-20 w-full shadow-md shadow-black font-serif md:flex md:justify-between grid grid-cols-2 py-3 md:py-4 px-4 md:px-10 text-white bg-neutral-800">
@@ -32,21 +37,45 @@ const Header = () => {
             : "hidden"
         }`}
       >
+        <Link to={"/"}
+        onClick={()=>{handleMenuClose()}}
+        >
         <div className="py-1 md:py-auto hover:text-emerald-500 hover:cursor-pointer transition-all duration-300">
           Home
         </div>
+        </Link>
+
+        <Link to={"/about"}
+        onClick={()=>{handleMenuClose()}}
+        >
         <div className="py-1 md:py-auto hover:text-emerald-500 hover:cursor-pointer transition-all duration-300">
           About
         </div>
+        </Link>
+       
+        <Link to={"/products"}
+        onClick={()=>{handleMenuClose()}}
+        >
         <div className="py-1 md:py-auto hover:text-emerald-500 hover:cursor-pointer transition-all duration-300">
           Products
         </div>
+        </Link>
+        
+        <Link to={"/services"}
+        onClick={()=>{handleMenuClose()}}
+        >
         <div className="py-1 md:py-auto hover:text-emerald-500 hover:cursor-pointer transition-all duration-300">
           Services
         </div>
-        <div className="pt-1 md:py-auto hover:text-emerald-500 hover:cursor-pointer transition-all duration-300">
+        </Link>
+
+        <Link to={"/contactheader"}
+        onClick={()=>{handleMenuClose()}}
+        >
+        <div className="py-1 md:py-auto hover:text-emerald-500 hover:cursor-pointer transition-all duration-300">
           Contact
         </div>
+        </Link>
       </nav>
 
       <div
