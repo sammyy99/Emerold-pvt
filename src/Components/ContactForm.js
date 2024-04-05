@@ -1,39 +1,51 @@
-import React, { useRef } from "react";
-import axios from "axios"
+import React, { useRef, useState } from "react";
+import axios from "axios";
 
 const ContactForm = () => {
+  const [emailStatus, setEmailStatus] = useState(false); // to show hide message box
+  const [sendAction, setSendAction] = useState(false); // to show hide sending
 
-  const name = useRef(null)
-  const email = useRef(null)
-  const message = useRef(null)
+  const name = useRef(null);
+  const email = useRef(null);
+  const message = useRef(null);
 
-  const handleSend = async()=>{
+  const handleMesaageClose = () => {
+    setEmailStatus(false);
+  };
+
+  const handleSend = async () => {
+    setSendAction(true);
 
     const formData = {
-      name : name.current.value,
-      email : email.current.value,
-      message : message.current.value
-    }
-    console.log(formData)
+      name: name.current.value,
+      email: email.current.value,
+      message: message.current.value,
+    };
+    console.log(formData);
 
     try {
-     
-      const response = await axios.post("http://localhost:5000/send",formData);
+      const response = await axios.post("http://localhost:5000/send", formData);
 
-      if (response.status===200) {
-         console.log("Email send succefully")
-         name.current.value = ""
-         email.current.value = ""
-         message.current.value = ""
+      if (response.status === 200) {
+        setSendAction(false);
+        setEmailStatus(true);
+
+        setTimeout(() => {
+          setEmailStatus(false);
+        }, 3000);
+
+        console.log(emailStatus);
+        console.log("Email send succefully");
+        name.current.value = "";
+        email.current.value = "";
+        message.current.value = "";
       } else {
-         console.log("Failed to send email")
+        console.log("Failed to send email");
       }
-      
     } catch (error) {
-      console.log("Error in sendint mail : "+error)
+      console.log("Error in sendint mail : " + error);
     }
-
-  }
+  };
 
   return (
     <div className="p-4 md:p-8 border bg-white my-4 md:my-6 md:ml-2 rounded-md shadow-md hover:shadow-gray-600 hover:shadow-lg ">
@@ -61,10 +73,36 @@ const ContactForm = () => {
           placeholder="Message"
         />
       </div>
-      <div>
+      <div className="flex justify-between">
         <button
-         onClick={()=>{handleSend()}}
-        className="border rounded-md py-2 px-4 hover:cursor-pointer hover:shadow-gray-600 hover:shadow-lg hover:border-black">Submit</button>
+          onClick={() => {
+            handleSend();
+          }}
+          className={`${sendAction?"opacity-50 pointer-events-none":""} border rounded-md py-2 px-4 hover:cursor-pointer hover:shadow-gray-600 hover:shadow-lg hover:border-black`}
+        >
+          Submit
+        </button>
+
+        <div
+          className={` ${sendAction?"block":"hidden"} flex w-fit rounded-md py-2 px-4 bg-neutral-300`}
+        >
+          <img className="w-6 " alt="" src="loading.svg"></img>
+          <h1 className="px-2  font-thin"> Submitting query....</h1>
+        </div>
+
+        <div
+          className={`${emailStatus?"block":"hidden"} flex blockx w-fit rounded-md py-2 px-4 bg-green-500 bg-opacity-70`}
+          onClick={() => {
+            handleMesaageClose();
+          }}
+        >
+            <img
+              className="w-6  hover:cursor-pointer"
+              alt=""
+              src="done.svg"
+            ></img>
+          <h1 className="px-1">Query submitted.</h1>
+        </div>
       </div>
     </div>
   );
